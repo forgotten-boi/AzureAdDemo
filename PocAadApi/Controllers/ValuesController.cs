@@ -11,16 +11,45 @@ namespace PocAadApi.Controllers
     public class ValuesController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+
+        private static string[] Summaries = new[]
         {
-            return new string[] { "value1", "value2" };
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
+
+
+        public IEnumerable<WeatherForecast> Get()
+        {
+            var rng = new Random();
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            });
         }
 
-        // GET api/values/5
-        public string Get(int id)
+
+        public class WeatherForecast
         {
-            return "value";
+            public string DateFormatted { get; set; }
+            public int TemperatureC { get; set; }
+            public string Summary { get; set; }
+
+            public int TemperatureF
+            {
+                get
+                {
+                    return 32 + (int)(TemperatureC / 0.5556);
+                }
+            }
         }
+
+        //// GET api/values/5
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST api/values
         public void Post([FromBody]string value)

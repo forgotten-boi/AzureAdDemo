@@ -68,6 +68,18 @@ namespace PocAadClient.Controllers
                 {
                     string responseString = await response.Content.ReadAsStringAsync();
                     profile = JsonConvert.DeserializeObject<UserProfile>(responseString);
+
+                    var roles = ((ClaimsIdentity)User.Identity).Claims
+                .Where(c => c.Type == ClaimTypes.Role)
+                .Select(c => c.Value);
+
+                    //ClaimsIdentity claimsId = ClaimsPrincipal.Current.Identity as ClaimsIdentity;
+                    //var appRoles = new List<String>();
+                    //foreach (Claim claim in ClaimsPrincipal.Current.FindAll("roles"))
+                    //    appRoles.Add(claim.Value);
+                    ViewData["appRoles"] = roles?.FirstOrDefault().ToString();
+
+
                 }
                 else
                 {

@@ -33,7 +33,7 @@ namespace PocAadClient.Controllers
         // GET: Weather
         public async Task<ActionResult> Index()
         {
-            AuthenticationResult result = null;
+            //AuthenticationResult result = null;
             List<Weather> itemList = new List<Weather>();
 
             try
@@ -43,12 +43,12 @@ namespace PocAadClient.Controllers
                 AuthenticationContext authContext = new AuthenticationContext(Startup.authority, false);
                 ClientCredential credential = new ClientCredential(clientId, appKey);
 
-                AuthenticationResult authenticationResult = await authContext.AcquireTokenAsync(clientId, credential);
+                //AuthenticationResult authenticationResult = await authContext.AcquireTokenAsync(clientId, credential);
 
 
-                result = await authContext.AcquireTokenSilentAsync(todoListResourceId, credential, new UserIdentifier(userObjectID, UserIdentifierType.UniqueId));
+                var result = await authContext.AcquireTokenSilentAsync(todoListResourceId, credential, new UserIdentifier(userObjectID, UserIdentifierType.UniqueId));
 
-
+           
 
                 //
                 // Retrieve the user's To Do List.

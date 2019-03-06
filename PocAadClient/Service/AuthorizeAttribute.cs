@@ -18,7 +18,7 @@ namespace PocAadClient
             {
                 //One Strategy:
                 //filterContext.Result = new System.Web.Mvc.HttpStatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
-
+                //filterContext.Result = new System.Web.Mvc.HttpStatusCodeResult((int)System.Net.HttpStatusCode.Unauthorized);
                 //Another Strategy:
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary(
